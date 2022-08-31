@@ -71,7 +71,7 @@ extension CascadingTableDelegate {
 	
 	- returns: This class' instance.
 	*/
-	public init(index: Int = 0, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
+	open init(index: Int = 0, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
 		
 		self.init(index: index, childDelegates: childDelegates)
 		
