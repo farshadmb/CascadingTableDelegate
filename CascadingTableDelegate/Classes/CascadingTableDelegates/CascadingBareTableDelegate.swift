@@ -26,7 +26,7 @@ open class CascadingBareTableDelegate: NSObject {
 	open var childDelegates: [CascadingTableDelegate]
 	open weak var parentDelegate: CascadingTableDelegate?
 	
-	required public init(index: Int, childDelegates: [CascadingTableDelegate]) {
+	public init(index: Int, childDelegates: [CascadingTableDelegate]) {
 		self.index = index
 		self.childDelegates = childDelegates
 	}
