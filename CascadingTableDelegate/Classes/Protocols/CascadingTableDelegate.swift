@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objc
 public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelegate {
 	
 	/**
@@ -31,18 +32,7 @@ public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelega
 	*/
 	var parentDelegate: CascadingTableDelegate? { get set }
 	
-	/**
-	Base initializer for this instance.
-	
-	- parameter index:          `index` value for this instance. May be changed later.
-	- parameter childDelegates: Array of child `CascadingTableDelegate`s.
-	
-	- note: This instance should set the passed `childDelegate`'s `parentDelegate` to itself.
-	
-	- returns: This class' instance.
-	*/
-	init(index: Int, childDelegates: [CascadingTableDelegate])
-	
+
 	/**
 	Preparation method that will be called by this instance's parent, normally in the first time.
 	
@@ -54,7 +44,7 @@ public protocol CascadingTableDelegate: UITableViewDataSource, UITableViewDelega
 	func prepare(tableView: UITableView)
 }
 
-extension CascadingTableDelegate {
+extension CascadingTableDelegate where Self: NSObject   {
 	
 	/**
 	Convenience initializer for this protocol, that will assign `index`es of the passed `childDelegates`, set their `parentDelegate` to this instance, and call this instance and its child's `prepare(tableView:)` method.
@@ -71,9 +61,11 @@ extension CascadingTableDelegate {
 	
 	- returns: This class' instance.
 	*/
-	open init(index: Int = 0, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
-		
-		self.init(index: index, childDelegates: childDelegates)
+    
+    public init(index: Int = 0, childDelegates: [CascadingTableDelegate], tableView: UITableView?) {
+        self.init()
+        self.index = index
+        self.childDelegates = childDelegates
 		
 		validateChildDelegates()
 		
@@ -84,7 +76,9 @@ extension CascadingTableDelegate {
 		tableView?.delegate = self
 		tableView?.dataSource = self
 	}
-	
+}
+
+extension CascadingTableDelegate {
 	/**
 	Convenience method for validating child delegates - setting their `parentDelegate` to this instance's weak reference and set their indexes, so each of it has the corresponding index based on their index in this instance's `childDelegates` array sequence.
 	*/

@@ -63,7 +63,8 @@ open class PropagatingTableDelegate: NSObject {
 		self.propagationMode = propagationMode
 	}
 	
-	public init(index: Int, childDelegates: [CascadingTableDelegate]) {
+    
+    public init(index: Int, childDelegates: [CascadingTableDelegate]) {
 		
 		self.index = index
 		self.childDelegates = childDelegates
