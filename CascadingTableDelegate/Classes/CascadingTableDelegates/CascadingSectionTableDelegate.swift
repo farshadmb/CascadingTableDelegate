@@ -76,7 +76,7 @@ open class CascadingSectionTableDelegate: PropagatingTableDelegate {
 	
 	// MARK: - Initializers
 	
-	required public init(index: Int, childDelegates: [CascadingTableDelegate]) {
+	public init(index: Int, childDelegates: [CascadingTableDelegate]) {
 		
 		super.init(index: index, childDelegates: childDelegates)
 		self.propagationMode = .row
